@@ -22,11 +22,11 @@ $ npm install hexo-douban-card --save
 
 ### 参数阐述
 
-第一项`douban` 代表插件名
+- 第一项`douban` 代表插件名
 
-第二项可选:`movie`,`book`,`music`
+- 第二项可选:`movie`,`book`,`music`
 
-第三项请填入对应的`id`例如:
+- 第三项请填入对应的`id`例如:
 
 ![](https://img.tanknee.cn/blogpicbed/2020/07/2020070821522816eaefa.png)
 
@@ -36,4 +36,6 @@ $ npm install hexo-douban-card --save
 
 ![](https://img.tanknee.cn/blogpicbed/2020/07/20200708f878ac4cfa250.png)
 
-作品站点
+### 作品站点
+
+https://www.tanknee.cn

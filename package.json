@@ -3,8 +3,7 @@
     "version": "1.1.7",
     "description": "hexo douban card in post",
     "main": "index.js",
-    "scripts": {
-    },
+    "scripts": {},
     "keywords": [
         "hexo",
         "douban",
