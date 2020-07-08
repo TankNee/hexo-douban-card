@@ -1,10 +1,9 @@
 {
     "name": "hexo-douban-card",
-    "version": "1.0.2",
+    "version": "1.1.7",
     "description": "hexo douban card in post",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
         "hexo",

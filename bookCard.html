@@ -1,16 +1,16 @@
 <div class="douban-card-block">
-	<div class="douban-card">
-		<div class="douban-card-bgimg"></div>
+	<a class="douban-card" href="{{url}}">
+		<div class="douban-card-bgimg" style="background-image: url('{{img}}');"></div>
 		<div class="douban-card-left">
-			<div class="douban-card-img"></div>
+			<div class="douban-card-img" style="background-image: url('{{img}}');"></div>
 		</div>
-		<div class="douban-card-right">
+		<div class="douban-card-right" style="line-height: 1.7;">
 			<div class="douban-card-item"><span>书名: </span><strong>{{title}}</strong></div>
 			<div class="douban-card-item"><span>作者: </span><span>{{author}}</span></div>
 			<div class="douban-card-item"><span>出版年份: </span><span>{{publishDate}}</span></div>
 			<div class="douban-card-item"><span>评分: </span><span>{{rate}}</span></div>
 		</div>
-	</div>
+	</a>
 </div>
 <style>
 	.douban-card-block {
@@ -30,6 +30,10 @@
 		align-items: center;
 		overflow: hidden;
 		color: antiquewhite;
+		text-decoration: none;
+	}
+	.douban-card:hover {
+		text-decoration: none;
 	}
 	.douban-card-bgimg {
 		position: absolute;
@@ -39,14 +43,19 @@
 		background-size: 100%;
 		background-position: center;
 		background-repeat: no-repeat;
-		background-image: url('{{img}}');
 	}
 	.douban-card-img {
 		position: relative;
 		height: 130px;
 		width: 80px;
-		background-image: url('{{img}}');
 		background-size: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.douban-card-img {
+		position: relative;
+		height: 130px;
+		width: 80px;
 	}
 	.douban-card-left {
 		position: relative;
@@ -58,9 +67,11 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		margin-left: 8px;
+		margin-left: 12px;
 		font-size: 16px;
 		font-family: 'Courier New', Courier, monospace;
+		line-height: 1.3;
+		color: antiquewhite;
 	}
 	.douban-card-item {
 		margin-top: 4px;

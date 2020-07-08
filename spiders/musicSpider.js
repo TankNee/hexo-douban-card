@@ -1,20 +1,20 @@
 const { BaseSpider } = require('./baseSpider');
 
-class MovieSpider extends BaseSpider {
+class MusicSpider extends BaseSpider {
 	constructor() {
 		super();
 	}
 	/**
-	 *爬取电影内容
+	 *爬取书本内容
 	 * @param {number} subjectId
 	 */
 	crawl(subjectId) {
 		return new Promise((resolve, reject) => {
 			this.superagent
-				.get(this.ENDPOINT.MOVIE + subjectId)
+				.get(this.ENDPOINT.MUSIC + subjectId)
 				.then((res) => {
-					var movieInfo = this.parsePlainText(res.text);
-					resolve({ ...movieInfo, url: this.ENDPOINT.MOVIE + subjectId });
+					var musicInfo = this.parsePlainText(res.text);
+					resolve({ ...musicInfo, url: this.ENDPOINT.MUSIC + subjectId });
 				})
 				.catch(reject);
 		});
@@ -28,33 +28,31 @@ class MovieSpider extends BaseSpider {
 		var info = {
 			title: $('h1').text().replace(/\s/g, ''),
 		};
-		var movieInfo = $('#info').find('.pl').toArray();
-		movieInfo.forEach((element) => {
-			var itemName = $(element).text();
-			if (itemName.indexOf('导演') !== -1) {
-				var director = $(element).next().text();
-				director = director.replace(/\s/g, '');
-				info = {
-					...info,
-					director: director,
-				};
-			} else if (itemName.indexOf('主演') !== -1) {
-				var actors = $(element).next().text();
+		var musicInfo = $('#info').find('.pl').toArray();
+		musicInfo.forEach((element) => {
+			var itemName = $(element).text().replace(/\s/g, '');
+			if (itemName.indexOf('表演者') !== -1) {
+				var actors = itemName.replace('表演者:', '');
 				actors = actors.replace(/\s/g, '').split('/');
 				info = {
 					...info,
 					actors: actors.slice(0, 2).join('/'),
 				};
-			} else if (itemName.indexOf('上映日期') !== -1) {
-				var publishDate = $(element).next().text().replace(/\s/g, '');
+			} else if (itemName.indexOf('发行时间') !== -1) {
+				var publishDate = element.next.data.replace(/\s/g, '');
 				info = {
 					...info,
 					publishDate: publishDate,
 				};
+			} else if (itemName.indexOf('流派') !== -1) {
+				var genre = element.next.data.replace(/\s/g, '');
+				info = {
+					...info,
+					genre: genre,
+				};
 			}
 		});
-
-		var bg = $('#mainpic').children('.nbgnbg');
+		var bg = $('#mainpic').children('.ckd-collect').children('.nbg');
 		var bgUrl = $(bg).children('img')[0].attribs.src;
 		info = {
 			...info,
@@ -65,4 +63,4 @@ class MovieSpider extends BaseSpider {
 	}
 }
 
-module.exports.MovieSpider = MovieSpider;
+module.exports.MusicSpider = MusicSpider;

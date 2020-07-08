@@ -1,6 +1,8 @@
-const bookSpider = require('./bookSpider');
-const movieSpider = require('./movieSpider');
+const { MusicSpider } = require('./musicSpider');
+const { BookSpider } = require('./bookSpider');
+const { MovieSpider } = require('./movieSpider');
 module.exports = {
-	bookSpider: bookSpider,
-	movieSpider: movieSpider,
+	BookSpider: BookSpider,
+	MovieSpider: MovieSpider,
+	MusicSpider: MusicSpider,
 };
