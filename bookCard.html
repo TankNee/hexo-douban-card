@@ -1,8 +1,8 @@
 <div class="douban-card-block">
 	<div class="douban-card">
-		<img class="douban-card-bgimg" src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2526405034.webp" alt="背景图片" />
+		<div class="douban-card-bgimg"></div>
 		<div class="douban-card-left">
-			<img class="douban-card-img" src="https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2526405034.webp" alt="书籍图片" />
+			<div class="douban-card-img"></div>
 		</div>
 		<div class="douban-card-right">
 			<div class="douban-card-item"><span>书名: </span><strong>{{title}}</strong></div>
@@ -39,11 +39,14 @@
 		background-size: 100%;
 		background-position: center;
 		background-repeat: no-repeat;
+		background-image: url('{{img}}');
 	}
 	.douban-card-img {
 		position: relative;
 		height: 130px;
 		width: 80px;
+		background-image: url('{{img}}');
+		background-size: 100%;
 	}
 	.douban-card-left {
 		position: relative;

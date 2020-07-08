@@ -40,10 +40,10 @@ const parsePlainText = (plainText) => {
 			};
 		} else if (itemName.indexOf('主演') !== -1) {
 			var actors = $(element).next().text();
-			// actors = actors.replace(/\s/g, '').split('/');
+			actors = actors.replace(/\s/g, '').split('/');
 			info = {
 				...info,
-				actors: actors.join(''),
+				actors: actors.slice(0, 2).join('/'),
 			};
 		} else if (itemName.indexOf('上映日期') !== -1) {
 			var publishDate = $(element).next().text().replace(/\s/g, '');
@@ -53,9 +53,13 @@ const parsePlainText = (plainText) => {
 			};
 		}
 	});
+
+	var bg = $('#mainpic').children('.nbgnbg');
+	var bgUrl = $(bg).children('img')[0].attribs.src;
 	info = {
 		...info,
 		rate: $('.rating_num').text().replace(/\s/g, ''),
+		img: bgUrl,
 	};
 	return info;
 };

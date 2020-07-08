@@ -37,8 +37,8 @@ hexo.extend.tag.register(
 						resolve(res);
 					});
 				});
-            } else if (type === 'movie') {
-                movieSpider.crawl(subjectId).then((movieInfo) => {
+			} else if (type === 'movie') {
+				movieSpider.crawl(subjectId).then((movieInfo) => {
 					nunjucks.render(DOUBAN_CARD_MOVIE_TEMPLATE, movieInfo, (err, res) => {
 						if (err) {
 							return reject(err);
@@ -46,7 +46,7 @@ hexo.extend.tag.register(
 						resolve(res);
 					});
 				});
-            }
+			}
 		});
 	},
 	{

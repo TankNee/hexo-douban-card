@@ -46,10 +46,14 @@ const parsePlainText = (plainText) => {
 			};
 		}
 	});
+	var bg = $('#mainpic').children('.nbg');
+	var bgUrl = $(bg).children('img')[0].attribs.src;
 	info = {
 		...info,
 		rate: $('.rating_num').text().replace(/\s/g, ''),
+		img: bgUrl,
 	};
+
 	return info;
 };
 
