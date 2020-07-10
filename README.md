@@ -2,6 +2,11 @@
 
 一个 HEXO 插件,实现了用 HEXO 语法来在博客中插入一个豆瓣读书卡片的功能,现在实现了读书和电影两个板块
 
+[![NPM version](https://badge.fury.io/js/hexo-douban-card.svg)](https://www.npmjs.com/package/hexo-douban-card)
+[![npm](https://img.shields.io/npm/dt/hexo-douban-card.svg)](https://www.npmjs.com/package/hexo-douban-card)
+[![GitHub license](https://img.shields.io/github/license/TankNee/hexo-douban-card.svg)](https://github.com/TankNee/hexo-douban-card/blob/master/LICENSE)
+[![NPM](https://nodei.co/npm/hexo-douban-card.png)](https://nodei.co/npm/hexo-douban-card/)
+
 ### 用法
 
 首先请安装插件
