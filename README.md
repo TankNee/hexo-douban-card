@@ -43,4 +43,10 @@ $ npm install hexo-douban-card --save
 
 ### 作品站点
 
-https://www.tanknee.cn
+https://www.tanknee.cn/2020/07/08/Hexo%E8%B1%86%E7%93%A3%E6%96%87%E7%AB%A0%E6%8F%92%E4%BB%B6/
+
+## 2020/07/13 更新
+
+某些特定的电影需要登陆才可以查看到对应的信息,1.1.8-c版本不做修改时会报生成错误,暂时只做冷处理,即显示一个提示图片,在下一个版本`1.1.10`中会做更优化的处理!
+
+![](https://img.tanknee.cn/blogpicbed/2020/07/20200713875399cbbb527.png)

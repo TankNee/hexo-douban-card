@@ -16,7 +16,16 @@ class MovieSpider extends BaseSpider {
 					var movieInfo = this.parsePlainText(res.text);
 					resolve({ ...movieInfo, url: this.ENDPOINT.MOVIE + subjectId });
 				})
-				.catch(reject);
+				.catch((err) => {
+					if (err.status === 404) {
+						resolve({
+							url: this.ENDPOINT.MOVIE + subjectId,
+							title: '该卡片指向的电影需要登陆或您输入的id存在错误!',
+							img: 'https://images.weserv.nl/?url=https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2221768894.webp',
+						});
+					}
+					reject(err);
+				});
 		});
 	}
 	/**

@@ -16,7 +16,16 @@ class BookSpider extends BaseSpider {
 					var bookInfo = this.parsePlainText(res.text);
 					resolve({ ...bookInfo, url: this.ENDPOINT.BOOK + subjectId });
 				})
-				.catch(reject);
+				.catch((err) => {
+					if (err.status === 404) {
+						resolve({
+							url: this.ENDPOINT.MOVIE + subjectId,
+							title: '该卡片指向的书籍需要登陆或您输入的id存在错误!',
+							img: 'https://images.weserv.nl/?url=https://img1.doubanio.com/view/subject/s/public/s33309978.jpg',
+						});
+					}
+					reject(err);
+				});
 		});
 	}
 	/**

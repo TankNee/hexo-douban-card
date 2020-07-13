@@ -16,7 +16,16 @@ class MusicSpider extends BaseSpider {
 					var musicInfo = this.parsePlainText(res.text);
 					resolve({ ...musicInfo, url: this.ENDPOINT.MUSIC + subjectId });
 				})
-				.catch(reject);
+				.catch((err) => {
+					if (err.status === 404) {
+						resolve({
+							url: this.ENDPOINT.MOVIE + subjectId,
+							title: '该卡片指向的音乐需要登陆或您输入的id存在错误!',
+							img: 'https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/m/public/s32295462.jpg',
+						});
+					}
+					reject(err);
+				});
 		});
 	}
 	/**

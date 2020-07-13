@@ -1,4 +1,4 @@
-const { BookSpider, MovieSpider, MusicSpider } = require('./spiders');
+const {BookSpider, MovieSpider, MusicSpider} = require('./spiders');
 const nunjucks = require('nunjucks');
 const path = require('path');
 
@@ -9,9 +9,8 @@ var bookSpider = new BookSpider();
 var movieSpider = new MovieSpider();
 var musicSpider = new MusicSpider();
 nunjucks.configure({
-	watch: false,
+    watch: false,
 });
-
 
 /**
  * 注册标签渲染
