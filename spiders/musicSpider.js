@@ -12,7 +12,7 @@ class MusicSpider extends BaseSpider {
         return new Promise((resolve, reject) => {
             this.superagent
                 .get(this.ENDPOINT.MUSIC + subjectId)
-                .set("Cookie", cookie)
+                .set("Cookie", this.cookie)
                 .then((res) => {
                     var musicInfo = this.parsePlainText(res.text);
                     resolve({ ...musicInfo, url: this.ENDPOINT.MUSIC + subjectId });
