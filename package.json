@@ -1,6 +1,6 @@
 {
     "name": "hexo-douban-card",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "hexo douban card in post",
     "main": "index.js",
     "scripts": {},
