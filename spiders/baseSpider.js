@@ -11,7 +11,7 @@ class BaseSpider {
             MUSIC: "https://music.douban.com/subject/",
         };
         // 用户传入的cookie
-        this.cookie = cookie;
+        this.cookie = cookie || "";
     }
     /**
      * 爬取内容,评价等
