@@ -4,6 +4,7 @@ class MovieSpider extends BaseSpider {
     constructor(cookie) {
         super(cookie);
     }
+    placeholder = "灯影绰约";
     /**
      *爬取电影内容
      * @param {number} subjectId
@@ -23,6 +24,7 @@ class MovieSpider extends BaseSpider {
                             url: this.ENDPOINT.MOVIE + subjectId,
                             title: "该卡片指向的电影需要登陆或您输入的id存在错误!",
                             img: "https://images.weserv.nl/?url=https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2221768894.webp",
+                            status: this.placeholder,
                         });
                     }
                     reject(err);
@@ -63,10 +65,11 @@ class MovieSpider extends BaseSpider {
                 };
             }
         });
-
+        var status = $("#interest_sect_level > div > span.mr10").text() || this.placeholder;
         var bg = $("#mainpic").children(".nbgnbg");
         var bgUrl = $(bg).children("img")[0].attribs.src;
         info = {
+            status,
             ...info,
             rate: $(".rating_num").text().replace(/\s/g, ""),
             img: "https://images.weserv.nl/?url=" + bgUrl,

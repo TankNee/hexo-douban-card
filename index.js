@@ -1,7 +1,7 @@
 const { BookSpider, MovieSpider, MusicSpider } = require("./spiders");
-const nunjucks = require("nunjucks");
+const renderer = require("./renderer");
 const path = require("path");
-
+const fs = require("hexo-fs");
 const { config } = hexo;
 const { doubanCard } = config;
 var cookie;
@@ -9,15 +9,13 @@ if (doubanCard) {
     cookie = doubanCard.cookie;
 }
 
-const DOUBAN_CARD_BOOK_TEMPLATE = path.resolve(__dirname, "bookCard.html");
-const DOUBAN_CARD_MOVIE_TEMPLATE = path.resolve(__dirname, "movieCard.html");
-const DOUBAN_CARD_MUSIC_TEMPLATE = path.resolve(__dirname, "musicCard.html");
+const DOUBAN_CARD_BOOK_TEMPLATE = path.resolve(__dirname, "./templates/bookCard.html");
+const DOUBAN_CARD_MOVIE_TEMPLATE = path.resolve(__dirname, "./templates/movieCard.html");
+const DOUBAN_CARD_MUSIC_TEMPLATE = path.resolve(__dirname, "./templates/musicCard.html");
+const style = fs.readFileSync(path.resolve(__dirname, "./templates/assets/style.css"), { encoding: "utf8" });
 var bookSpider = new BookSpider(cookie);
 var movieSpider = new MovieSpider(cookie);
 var musicSpider = new MusicSpider(cookie);
-nunjucks.configure({
-    watch: false,
-});
 
 /**
  * 注册标签渲染
@@ -42,7 +40,7 @@ hexo.extend.tag.register(
 
             if (type === "book") {
                 bookSpider.crawl(subjectId).then((bookInfo) => {
-                    nunjucks.render(DOUBAN_CARD_BOOK_TEMPLATE, bookInfo, (err, res) => {
+                    renderer.render(DOUBAN_CARD_BOOK_TEMPLATE, { style, ...bookInfo }, (err, res) => {
                         if (err) {
                             return reject(err);
                         }
@@ -51,7 +49,7 @@ hexo.extend.tag.register(
                 });
             } else if (type === "movie") {
                 movieSpider.crawl(subjectId).then((movieInfo) => {
-                    nunjucks.render(DOUBAN_CARD_MOVIE_TEMPLATE, movieInfo, (err, res) => {
+                    renderer.render(DOUBAN_CARD_MOVIE_TEMPLATE, { style, ...movieInfo }, (err, res) => {
                         if (err) {
                             return reject(err);
                         }
@@ -60,7 +58,7 @@ hexo.extend.tag.register(
                 });
             } else if (type === "music") {
                 musicSpider.crawl(subjectId).then((musicInfo) => {
-                    nunjucks.render(DOUBAN_CARD_MUSIC_TEMPLATE, musicInfo, (err, res) => {
+                    renderer.render(DOUBAN_CARD_MUSIC_TEMPLATE, { style, ...musicInfo }, (err, res) => {
                         if (err) {
                             return reject(err);
                         }

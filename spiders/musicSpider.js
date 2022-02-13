@@ -4,6 +4,7 @@ class MusicSpider extends BaseSpider {
     constructor(cookie) {
         super(cookie);
     }
+    placeholder = "余音绕梁";
     /**
      *爬取书本内容
      * @param {number} subjectId
@@ -23,6 +24,7 @@ class MusicSpider extends BaseSpider {
                             url: this.ENDPOINT.MOVIE + subjectId,
                             title: "该卡片指向的音乐需要登陆或您输入的id存在错误!",
                             img: "https://images.weserv.nl/?url=https://img3.doubanio.com/view/subject/m/public/s32295462.jpg",
+                            status: this.placeholder,
                         });
                     }
                     reject(err);
@@ -62,9 +64,11 @@ class MusicSpider extends BaseSpider {
                 };
             }
         });
+        var status = $("#interest_sect_level > div > span.mr10").text() || this.placeholder;
         var bg = $("#mainpic").children(".ckd-collect").children(".nbg");
         var bgUrl = $(bg).children("img")[0].attribs.src;
         info = {
+            status,
             ...info,
             rate: $(".rating_num").text().replace(/\s/g, ""),
             img: "https://images.weserv.nl/?url=" + bgUrl,

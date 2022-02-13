@@ -4,6 +4,7 @@ class BookSpider extends BaseSpider {
     constructor(cookie) {
         super(cookie);
     }
+    placeholder = "见字如晤";
     /**
      *爬取书本内容
      * @param {number} subjectId
@@ -23,6 +24,7 @@ class BookSpider extends BaseSpider {
                             url: this.ENDPOINT.MOVIE + subjectId,
                             title: "该卡片指向的书籍需要登陆或您输入的id存在错误!",
                             img: "https://images.weserv.nl/?url=https://img1.doubanio.com/view/subject/s/public/s33309978.jpg",
+                            status: this.placeholder,
                         });
                     }
                     reject(err);
@@ -56,9 +58,11 @@ class BookSpider extends BaseSpider {
                 };
             }
         });
+        var status = $("#interest_sect_level > div > span.mr10").text() || this.placeholder;
         var bg = $("#mainpic").children(".nbg");
         var bgUrl = $(bg).children("img")[0].attribs.src;
         info = {
+            status,
             ...info,
             rate: $(".rating_num").text().replace(/\s/g, ""),
             img: "https://images.weserv.nl/?url=" + bgUrl,

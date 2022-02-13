@@ -1,7 +1,7 @@
 {
     "name": "hexo-douban-card",
-    "version": "1.2.2",
-    "description": "hexo douban card in post",
+    "version": "1.2.6",
+    "description": "Generate douban card for hexo with customized renderer.",
     "main": "index.js",
     "scripts": {},
     "keywords": [
@@ -17,7 +17,7 @@
     "license": "MIT",
     "dependencies": {
         "cheerio": "^1.0.0-rc.3",
-        "nunjucks": "^3.2.1",
+        "hexo-fs": "^3.1.0",
         "superagent": "^5.3.1"
     },
     "repository": {
