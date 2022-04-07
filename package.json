@@ -1,6 +1,6 @@
 {
     "name": "hexo-douban-card",
-    "version": "1.2.6",
+    "version": "1.2.7",
     "description": "Generate douban card for hexo with customized renderer.",
     "main": "index.js",
     "scripts": {},
