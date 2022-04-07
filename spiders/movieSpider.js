@@ -57,7 +57,7 @@ class MovieSpider extends BaseSpider {
                     ...info,
                     actors: actors.slice(0, 2).join("/"),
                 };
-            } else if (itemName.indexOf("上映日期") !== -1) {
+            } else if (itemName.indexOf("上映日期") !== -1 || itemName.indexOf("首播") !== -1) {
                 var publishDate = $(element).next().text().replace(/\s/g, "");
                 info = {
                     ...info,
