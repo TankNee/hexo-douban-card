@@ -26,7 +26,13 @@ class BaseSpider {
         } else {
             fs.writeFileSync(fileName, JSON.stringify(oldData));
         }
-        oldData[this.type].push(data);
+        // replace the same subject id object
+        const oldIdx = oldData[this.type].findIndex(item => item.url === data.url);
+        if (oldIdx !== -1) {
+            oldData[this.type][oldIdx] = data;
+        } else {
+            oldData[this.type].push(data);
+        }
         fs.writeFileSync(fileName, JSON.stringify(oldData, null, 2));
     }
     getCache (subjectId) {
