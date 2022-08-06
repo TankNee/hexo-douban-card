@@ -2,7 +2,7 @@ const { BaseSpider } = require("./baseSpider");
 
 class BookSpider extends BaseSpider {
     constructor(cookie) {
-        super(cookie);
+        super("book", cookie);
     }
     placeholder = "见字如晤";
     /**
@@ -11,12 +11,19 @@ class BookSpider extends BaseSpider {
      */
     crawl(subjectId) {
         return new Promise((resolve, reject) => {
+            const cached = this.getCache(subjectId);
+            if (cached) {
+                resolve(cached);
+                return;
+            }
             this.superagent
                 .get(this.ENDPOINT.BOOK + subjectId)
                 .set("Cookie", this.cookie)
                 .then((res) => {
                     var bookInfo = this.parsePlainText(res.text);
-                    resolve({ ...bookInfo, url: this.ENDPOINT.BOOK + subjectId });
+                    var payload = { ...bookInfo, url: this.ENDPOINT.BOOK + subjectId };
+                    this.cache(payload);
+                    resolve(payload);
                 })
                 .catch((err) => {
                     if (err.status === 404) {

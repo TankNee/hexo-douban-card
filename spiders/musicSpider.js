@@ -2,7 +2,7 @@ const { BaseSpider } = require("./baseSpider");
 
 class MusicSpider extends BaseSpider {
     constructor(cookie) {
-        super(cookie);
+        super("music", cookie);
     }
     placeholder = "余音绕梁";
     /**
@@ -11,12 +11,19 @@ class MusicSpider extends BaseSpider {
      */
     crawl(subjectId) {
         return new Promise((resolve, reject) => {
+            const cached = this.getCache(subjectId);
+            if (cached) {
+                resolve(cached);
+                return;
+            }
             this.superagent
                 .get(this.ENDPOINT.MUSIC + subjectId)
                 .set("Cookie", this.cookie)
                 .then((res) => {
                     var musicInfo = this.parsePlainText(res.text);
-                    resolve({ ...musicInfo, url: this.ENDPOINT.MUSIC + subjectId });
+                    var payload = { ...musicInfo, url: this.ENDPOINT.MUSIC + subjectId };
+                    this.cache(payload);
+                    resolve(payload);
                 })
                 .catch((err) => {
                     if (err.status === 404) {

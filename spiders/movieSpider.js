@@ -2,7 +2,7 @@ const { BaseSpider } = require("./baseSpider");
 
 class MovieSpider extends BaseSpider {
     constructor(cookie) {
-        super(cookie);
+        super("movie", cookie);
     }
     placeholder = "灯影绰约";
     /**
@@ -11,12 +11,19 @@ class MovieSpider extends BaseSpider {
      */
     crawl(subjectId) {
         return new Promise((resolve, reject) => {
+            const cached = this.getCache(subjectId);
+            if (cached) {
+                resolve(cached);
+                return;
+            }
             this.superagent
                 .get(this.ENDPOINT.MOVIE + subjectId)
                 .set("Cookie", this.cookie)
                 .then((res) => {
                     var movieInfo = this.parsePlainText(res.text);
-                    resolve({ ...movieInfo, url: this.ENDPOINT.MOVIE + subjectId });
+                    const payload = { ...movieInfo, url: this.ENDPOINT.MOVIE + subjectId };
+                    this.cache(payload);
+                    resolve(payload);
                 })
                 .catch((err) => {
                     if (err.status === 404) {

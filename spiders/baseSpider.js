@@ -1,7 +1,11 @@
 const cheerio = require("cheerio");
 const superagent = require("superagent");
+const fs = require("hexo-fs");
+
+const fileName = "DoubanCard.json";
 class BaseSpider {
-    constructor(cookie) {
+    type;
+    constructor(type, cookie) {
         this.cheerio = cheerio;
         this.superagent = superagent;
         // 爬取节点
@@ -12,6 +16,27 @@ class BaseSpider {
         };
         // 用户传入的cookie
         this.cookie = cookie || "";
+        this.type = type;
+    }
+    cache(data) {
+        let oldData = { movie: [], book: [], music: [] };
+        if (fs.existsSync(fileName)) {
+            oldData = fs.readFileSync(fileName);
+            oldData = JSON.parse(oldData);
+        } else {
+            fs.writeFileSync(fileName, JSON.stringify(oldData));
+        }
+        oldData[this.type].push(data);
+    }
+    getCache (subjectId) {
+        let oldData = { movie: [], book: [], music: [] };
+        if (fs.existsSync(fileName)) {
+            oldData = fs.readFileSync(fileName);
+            oldData = JSON.parse(oldData);
+        } else {
+            fs.writeFileSync(fileName, JSON.stringify(oldData));
+        }
+        return oldData[this.type].find(item => item.url === this.ENDPOINT[this.type] + subjectId);
     }
     /**
      * 爬取内容,评价等
