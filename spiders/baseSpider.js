@@ -27,6 +27,7 @@ class BaseSpider {
             fs.writeFileSync(fileName, JSON.stringify(oldData));
         }
         oldData[this.type].push(data);
+        fs.writeFileSync(fileName, JSON.stringify(oldData, null, 2));
     }
     getCache (subjectId) {
         let oldData = { movie: [], book: [], music: [] };
