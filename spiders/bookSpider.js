@@ -70,15 +70,7 @@ class BookSpider extends BaseSpider {
         });
         var status = $("#interest_sect_level > div > span.mr10").text() || this.placeholder;
         status = status.replace(/\s/g, "").replace(/\n/g, "");
-        var bg;
-        var bgUrl;
-        try {
-            bg = $("#mainpic").children(".nbg");
-            bgUrl = $(bg).children("img")[0].attribs.src;
-        } catch (error) {
-            bg = $("#mainpic").children(".nbgnbg");
-            bgUrl = $(bg).children("img")[0].attribs.src;
-        }
+        var bgUrl = $("#mainpic img").attr("src");
         info = {
             status,
             ...info,
