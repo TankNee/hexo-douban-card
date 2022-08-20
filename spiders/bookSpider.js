@@ -74,10 +74,11 @@ class BookSpider extends BaseSpider {
         var bgUrl;
         try {
             bg = $("#mainpic").children(".nbg");
+            bgUrl = $(bg).children("img")[0].attribs.src;
         } catch (error) {
             bg = $("#mainpic").children(".nbgnbg");
+            bgUrl = $(bg).children("img")[0].attribs.src;
         }
-        bgUrl = $(bg).children("img")[0].attribs.src;
         info = {
             status,
             ...info,
