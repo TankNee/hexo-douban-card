@@ -13,6 +13,7 @@ class MusicSpider extends BaseSpider {
         return new Promise((resolve, reject) => {
             const cached = this.getCache(subjectId);
             if (cached) {
+                console.log(`音乐 ${cached.title} (${subjectId}) 已被缓存，直接使用缓存数据`);
                 resolve(cached);
                 return;
             }
@@ -72,8 +73,14 @@ class MusicSpider extends BaseSpider {
             }
         });
         var status = $("#interest_sect_level > div > span.mr10").text() || this.placeholder;
-        var bg = $("#mainpic").children(".ckd-collect").children(".nbg");
-        var bgUrl = $(bg).children("img")[0].attribs.src;
+        status = status.replace(/\s/g, "").replace(/\n/g, "");
+        var bg;
+        var bgUrl;
+        try {
+            bg = $("#mainpic").children(".nbg");
+        } catch (error) {
+            bg = $("#mainpic").children(".nbgnbg");
+        }
         info = {
             status,
             ...info,

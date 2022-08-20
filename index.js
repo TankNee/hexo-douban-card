@@ -38,33 +38,38 @@ hexo.extend.tag.register(
             }
             if (!(isNaN(type) && !isNaN(subjectId))) return reject(args);
 
-            if (type === "book") {
-                bookSpider.crawl(subjectId).then((bookInfo) => {
-                    renderer.render(DOUBAN_CARD_BOOK_TEMPLATE, { style, ...bookInfo }, (err, res) => {
-                        if (err) {
-                            return reject(err);
-                        }
-                        resolve(res);
+            try {
+                if (type === "book") {
+                    bookSpider.crawl(subjectId).then((bookInfo) => {
+                        renderer.render(DOUBAN_CARD_BOOK_TEMPLATE, { style, ...bookInfo }, (err, res) => {
+                            if (err) {
+                                return reject(err);
+                            }
+                            resolve(res);
+                        });
                     });
-                });
-            } else if (type === "movie") {
-                movieSpider.crawl(subjectId).then((movieInfo) => {
-                    renderer.render(DOUBAN_CARD_MOVIE_TEMPLATE, { style, ...movieInfo }, (err, res) => {
-                        if (err) {
-                            return reject(err);
-                        }
-                        resolve(res);
+                } else if (type === "movie") {
+                    movieSpider.crawl(subjectId).then((movieInfo) => {
+                        renderer.render(DOUBAN_CARD_MOVIE_TEMPLATE, { style, ...movieInfo }, (err, res) => {
+                            if (err) {
+                                return reject(err);
+                            }
+                            resolve(res);
+                        });
                     });
-                });
-            } else if (type === "music") {
-                musicSpider.crawl(subjectId).then((musicInfo) => {
-                    renderer.render(DOUBAN_CARD_MUSIC_TEMPLATE, { style, ...musicInfo }, (err, res) => {
-                        if (err) {
-                            return reject(err);
-                        }
-                        resolve(res);
+                } else if (type === "music") {
+                    musicSpider.crawl(subjectId).then((musicInfo) => {
+                        renderer.render(DOUBAN_CARD_MUSIC_TEMPLATE, { style, ...musicInfo }, (err, res) => {
+                            if (err) {
+                                return reject(err);
+                            }
+                            resolve(res);
+                        });
                     });
-                });
+                }
+            } catch (error) {
+                console.log(`爬取 ${type} ${subjectId} 失败：${error}`);
+                reject(err);
             }
         });
     },

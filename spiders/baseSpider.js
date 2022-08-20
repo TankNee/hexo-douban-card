@@ -27,7 +27,7 @@ class BaseSpider {
             fs.writeFileSync(fileName, JSON.stringify(oldData));
         }
         // replace the same subject id object
-        const oldIdx = oldData[this.type].findIndex(item => item.url === data.url);
+        const oldIdx = oldData[this.type].findIndex((item) => item.url === data.url);
         if (oldIdx !== -1) {
             oldData[this.type][oldIdx] = data;
         } else {
@@ -35,7 +35,12 @@ class BaseSpider {
         }
         fs.writeFileSync(fileName, JSON.stringify(oldData, null, 2));
     }
-    getCache (subjectId) {
+    /**
+     *
+     * @param {string} subjectId
+     * @returns
+     */
+    getCache(subjectId) {
         let oldData = { movie: [], book: [], music: [] };
         if (fs.existsSync(fileName)) {
             oldData = fs.readFileSync(fileName);
@@ -43,7 +48,7 @@ class BaseSpider {
         } else {
             fs.writeFileSync(fileName, JSON.stringify(oldData));
         }
-        return oldData[this.type].find(item => item.url === this.ENDPOINT[this.type] + subjectId);
+        return oldData[this.type].find((item) => item.url === this.ENDPOINT[this.type.toUpperCase()] + subjectId);
     }
     /**
      * 爬取内容,评价等

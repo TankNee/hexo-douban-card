@@ -13,6 +13,7 @@ class BookSpider extends BaseSpider {
         return new Promise((resolve, reject) => {
             const cached = this.getCache(subjectId);
             if (cached) {
+                console.log(`书籍 ${cached.title} (${subjectId}) 已被缓存，直接使用缓存数据`);
                 resolve(cached);
                 return;
             }
@@ -66,8 +67,15 @@ class BookSpider extends BaseSpider {
             }
         });
         var status = $("#interest_sect_level > div > span.mr10").text() || this.placeholder;
-        var bg = $("#mainpic").children(".nbg");
-        var bgUrl = $(bg).children("img")[0].attribs.src;
+        status = status.replace(/\s/g, "").replace(/\n/g, "");
+        var bg;
+        var bgUrl;
+        try {
+            bg = $("#mainpic").children(".nbg");
+        } catch (error) {
+            bg = $("#mainpic").children(".nbgnbg");
+        }
+        bgUrl = $(bg).children("img")[0].attribs.src;
         info = {
             status,
             ...info,
