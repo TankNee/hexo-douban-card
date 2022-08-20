@@ -17,6 +17,7 @@ class BookSpider extends BaseSpider {
                 resolve(cached);
                 return;
             }
+            this.logger.info(`正在爬取书籍 ${subjectId}`);
             this.superagent
                 .get(this.ENDPOINT.BOOK + subjectId)
                 .set("Cookie", this.cookie)
@@ -28,6 +29,7 @@ class BookSpider extends BaseSpider {
                 })
                 .catch((err) => {
                     if (err.status === 404) {
+                        this.logger.error(`书籍 ${subjectId} 不存在或指向的书籍需要登陆`);
                         resolve({
                             url: this.ENDPOINT.MOVIE + subjectId,
                             title: "该卡片指向的书籍需要登陆或您输入的id存在错误!",

@@ -17,6 +17,7 @@ class MusicSpider extends BaseSpider {
                 resolve(cached);
                 return;
             }
+            this.logger.info(`开始爬取音乐 ${subjectId}`);
             this.superagent
                 .get(this.ENDPOINT.MUSIC + subjectId)
                 .set("Cookie", this.cookie)
@@ -28,6 +29,7 @@ class MusicSpider extends BaseSpider {
                 })
                 .catch((err) => {
                     if (err.status === 404) {
+                        this.logger.info(`音乐 ${subjectId} 不存在或指向的音乐需要登录才能查看`);
                         resolve({
                             url: this.ENDPOINT.MOVIE + subjectId,
                             title: "该卡片指向的音乐需要登陆或您输入的id存在错误!",
