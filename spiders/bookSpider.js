@@ -1,8 +1,8 @@
 const { BaseSpider } = require("./baseSpider");
 
 class BookSpider extends BaseSpider {
-    constructor(cookie) {
-        super("book", cookie);
+    constructor(logger, cookie) {
+        super("book", logger, cookie);
     }
     placeholder = "见字如晤";
     /**
@@ -13,7 +13,7 @@ class BookSpider extends BaseSpider {
         return new Promise((resolve, reject) => {
             const cached = this.getCache(subjectId);
             if (cached) {
-                console.log(`书籍 ${cached.title} (${subjectId}) 已被缓存，直接使用缓存数据`);
+                this.logger.info(`书籍 ${cached.title} (${subjectId}) 已被缓存，直接使用缓存数据`);
                 resolve(cached);
                 return;
             }

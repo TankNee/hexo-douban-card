@@ -2,6 +2,7 @@ const { BookSpider, MovieSpider, MusicSpider } = require("./spiders");
 const renderer = require("./renderer");
 const path = require("path");
 const fs = require("hexo-fs");
+const HexoLog = require("hexo-log");
 const { config } = hexo;
 const { doubanCard } = config;
 var cookie;
@@ -13,10 +14,10 @@ const DOUBAN_CARD_BOOK_TEMPLATE = path.resolve(__dirname, "./templates/bookCard.
 const DOUBAN_CARD_MOVIE_TEMPLATE = path.resolve(__dirname, "./templates/movieCard.html");
 const DOUBAN_CARD_MUSIC_TEMPLATE = path.resolve(__dirname, "./templates/musicCard.html");
 const style = fs.readFileSync(path.resolve(__dirname, "./templates/assets/style.css"), { encoding: "utf8" });
-var bookSpider = new BookSpider(cookie);
-var movieSpider = new MovieSpider(cookie);
-var musicSpider = new MusicSpider(cookie);
-
+var bookSpider = new BookSpider(HexoLog({ name: "douban-book-card" }), cookie);
+var movieSpider = new MovieSpider(HexoLog({ name: "douban-movie-card" }), cookie);
+var musicSpider = new MusicSpider(HexoLog({ name: "douban-music-card" }), cookie);
+var logger = HexoLog({ name: "douban-card-index" });
 /**
  * 注册标签渲染
  */
@@ -68,7 +69,7 @@ hexo.extend.tag.register(
                     });
                 }
             } catch (error) {
-                console.log(`爬取 ${type} ${subjectId} 失败：${error}`);
+                logger.error(`爬取 ${type} ${subjectId} 失败：${error}`);
                 reject(err);
             }
         });
