@@ -5,10 +5,11 @@ const fs = require("hexo-fs");
 const fileName = "DoubanCard.json";
 class BaseSpider {
     type;
-    constructor(type, logger, cookie) {
+    constructor(type, logger, cookie, imgProxy) {
         this.cheerio = cheerio;
         this.superagent = superagent;
         this.logger = logger;
+        this.imgProxy = imgProxy || "https://images.weserv.nl/?url=";
         // 爬取节点
         this.ENDPOINT = {
             BOOK: "https://book.douban.com/subject/",

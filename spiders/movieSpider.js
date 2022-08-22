@@ -1,8 +1,8 @@
 const { BaseSpider } = require("./baseSpider");
 
 class MovieSpider extends BaseSpider {
-    constructor(cookie) {
-        super("movie", cookie);
+    constructor(logger, cookie, imgProxy) {
+        super("movie", logger, cookie, imgProxy);
     }
     placeholder = "灯影绰约";
     /**
@@ -82,7 +82,7 @@ class MovieSpider extends BaseSpider {
             status,
             ...info,
             rate: $(".rating_num").text().replace(/\s/g, ""),
-            img: "https://images.weserv.nl/?url=" + bgUrl,
+            img: this.imgProxy + bgUrl,
         };
         return info;
     }

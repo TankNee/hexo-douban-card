@@ -1,8 +1,8 @@
 const { BaseSpider } = require("./baseSpider");
 
 class MusicSpider extends BaseSpider {
-    constructor(cookie) {
-        super("music", cookie);
+    constructor(logger, cookie, imgProxy) {
+        super("music", logger, cookie, imgProxy);
     }
     placeholder = "余音绕梁";
     /**
@@ -81,7 +81,7 @@ class MusicSpider extends BaseSpider {
             status,
             ...info,
             rate: $(".rating_num").text().replace(/\s/g, ""),
-            img: "https://images.weserv.nl/?url=" + bgUrl,
+            img: this.imgProxy + bgUrl,
         };
         return info;
     }

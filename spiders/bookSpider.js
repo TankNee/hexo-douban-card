@@ -1,8 +1,8 @@
 const { BaseSpider } = require("./baseSpider");
 
 class BookSpider extends BaseSpider {
-    constructor(logger, cookie) {
-        super("book", logger, cookie);
+    constructor(logger, cookie, imgProxy) {
+        super("book", logger, cookie, imgProxy);
     }
     placeholder = "见字如晤";
     /**
@@ -75,7 +75,7 @@ class BookSpider extends BaseSpider {
             status,
             ...info,
             rate: $(".rating_num").text().replace(/\s/g, ""),
-            img: "https://images.weserv.nl/?url=" + bgUrl,
+            img: this.imgProxy + bgUrl,
         };
         return info;
     }
