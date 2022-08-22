@@ -45,6 +45,29 @@ $ npm install hexo-douban-card --save
 
 https://www.tanknee.cn/2020/07/08/Hexo%E8%B1%86%E7%93%A3%E6%96%87%E7%AB%A0%E6%8F%92%E4%BB%B6/
 
+### 插件配置
+
+需要在 `_config.yml` 中配置 `doubanCard`，但这并不是必选项，如果你遇到了某些需要登录的豆瓣网址，那么请填写 cookie，如果你遇到图片代理失效的问题，请自行替换 imgProxy。未经验证的代理网址可以参考这个 issue：#22
+
+```yml
+
+doubanCard:
+  cookie: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  imgProxy: https://images.weserv.nl/?url=
+
+```
+
+## 2022/08/21 更新
+
+修复了构造器的问题，并将自定义图片代理的功能放入用户配置中，现在，你可以使用如下配置：
+
+```yml
+
+doubanCard:
+  cookie: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  imgProxy: https://images.weserv.nl/?url=
+
+```
 
 ## 2022/08/20 更新
 
