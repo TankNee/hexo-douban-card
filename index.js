@@ -24,7 +24,7 @@ var logger = HexoLog({ name: "douban-card-index" });
 hexo.extend.injector.register(
     "head_begin",
     () => {
-        return style;
+        return `<style type="text/css">${style}</style>`;
     },
     "default"
 );
