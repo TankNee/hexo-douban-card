@@ -22,7 +22,7 @@ var musicSpider = new MusicSpider(HexoLog({ name: "douban-music-card" }), cookie
 var logger = HexoLog({ name: "douban-card-index" });
 
 hexo.extend.injector.register(
-    "head_end",
+    "head_begin",
     () => {
         return style;
     },
