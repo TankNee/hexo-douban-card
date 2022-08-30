@@ -53,10 +53,19 @@ https://www.tanknee.cn/2020/07/08/Hexo%E8%B1%86%E7%93%A3%E6%96%87%E7%AB%A0%E6%8F
 ```yml
 
 doubanCard:
+  enable: true
   cookie: ABCDEFGHIJKLMNOPQRSTUVWXYZ
   imgProxy: https://images.weserv.nl/?url=
 
 ```
+
+## 2022/08/30 更新
+
+添加了全局开关，现在可以直接在配置中开启或者关闭 douban-card，如果你想要关闭，请将 enable 设置为 false。另外，本版本中卡片的样式改为一次性插入到页面head中，不再重复插入。
+
+## 2022/08/28 更新
+
+添加了一个背景懒加载属性，请配合[https://github.com/Troy-Yang/hexo-lazyload-image](https://github.com/Troy-Yang/hexo-lazyload-image)使用。
 
 ## 2022/08/21 更新
 
@@ -65,6 +74,7 @@ doubanCard:
 ```yml
 
 doubanCard:
+  enable: true
   cookie: ABCDEFGHIJKLMNOPQRSTUVWXYZ
   imgProxy: https://images.weserv.nl/?url=
 
