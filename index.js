@@ -5,7 +5,6 @@ const fs = require("hexo-fs");
 const HexoLog = require("hexo-log");
 const { config } = hexo;
 const { doubanCard } = config;
-const css = hexo.extend.helper.get("css").bind(hexo);
 
 var cookie, imgProxy;
 if (doubanCard) {
@@ -25,8 +24,7 @@ var logger = HexoLog({ name: "douban-card-index" });
 hexo.extend.injector.register(
     "head_end",
     () => {
-        if (doubanCard.enable) return css("/templates/assets/style.css");
-        else return "";
+        return style;
     },
     "default"
 );
@@ -38,7 +36,6 @@ hexo.extend.tag.register(
     "douban",
     (args) => {
         return new Promise((resolve, reject) => {
-            if (!doubanCard.enable) return resolve("");
             var type, subjectId;
             // 参数类型验证
             if (!args[0] || !args[1]) {

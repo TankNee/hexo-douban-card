@@ -61,7 +61,7 @@ doubanCard:
 
 ## 2022/08/30 更新
 
-添加了全局开关，现在可以直接在配置中开启或者关闭 douban-card，如果你想要关闭，请将 enable 设置为 false。另外，本版本中卡片的样式改为一次性插入到页面head中，不再重复插入。
+~~添加了全局开关，现在可以直接在配置中开启或者关闭 douban-card，如果你想要关闭，请将 enable 设置为 false~~ 现已取消这个总开关。另外，本版本中卡片的样式改为一次性插入到页面head中，不再重复插入。
 
 ## 2022/08/28 更新
 
@@ -74,7 +74,6 @@ doubanCard:
 ```yml
 
 doubanCard:
-  enable: true
   cookie: ABCDEFGHIJKLMNOPQRSTUVWXYZ
   imgProxy: https://images.weserv.nl/?url=
 
